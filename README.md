@@ -60,19 +60,21 @@ lua tsc -f specs/*
 *30log* was initially designed for minimalistic purposes. But then commit after commit, I came up with a source code that was obviously surpassing 30 lines. As I wanted to stick to the "30-lines" rule that defines the name of this library, I had to use an ugly syntax which not much elegant, yet 100 % functional.<br/>
 For those who might be interested though, the file [30log-clean.lua](http://github.com/Yonaba/30log/blob/master/30log-clean.lua) contains the full source code, properly formatted and well indented for your perusal.
 
+#### Source of truth
+
+`30log/core.lua` now holds the shared runtime implementation used by the public entry points. This keeps `30log.lua` and `30log-global.lua` as thin wrappers so changes to the class system only need to land in one place.
+
 #### 30log-global.lua
 
-The file [30log-global.lua](http://github.com/Yonaba/30log/blob/master/30log-global.lua) features the exact same source as the original [30log.lua](http://github.com/Yonaba/30log/blob/master/30log.lua), 
-excepts that it sets a global named `class`. This is convenient for Lua-based frameworks such as [Codea](http://twolivesleft.com/Codea/).
-
+The file [30log-global.lua](http://github.com/Yonaba/30log/blob/master/30log-global.lua) now wraps the same core implementation as [30log.lua](http://github.com/Yonaba/30log/blob/master/30log.lua), while still exposing a global named `class`. This is convenient for Lua-based frameworks such as [Codea](http://twolivesleft.com/Codea/).
 
 #### 30log-singleton.lua
 
-The file [30log-singleton.lua](http://github.com/Yonaba/30log/blob/master/30log-global.lua) is a [singleton pattern](http://en.wikipedia.org/wiki/Singleton_pattern) implementation for use with *30log*.
+The file [30log-singleton.lua](http://github.com/Yonaba/30log/blob/master/30log-global.lua) is a [singleton pattern](http://en.wikipedia.org/wiki/Singleton_pattern) implementation for use with *30log*. It still builds on `require '30log'`, so the singleton entry point follows the same shared core.
 
 ## Contributors
 
-* [TsT2005](https://github.com/tst2005), for the original [Class-commons](https://github.com/bartbes/Class-Commons) implementation.
+* [TsT2005](https://github.com/bartbes/Class-Commons) for the original [Class-commons](https://github.com/bartbes/Class-Commons) implementation.
 * [Srdjan Marković](https://github.com/Yonaba/30log/blob/master/LICENSE#L22-L31) for the awesome graphic logo design.
 
 

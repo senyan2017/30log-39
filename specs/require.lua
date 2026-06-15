@@ -58,8 +58,35 @@ context('require("30log-global")', function()
 		assert_type(class, 'table')
 	end)
 	
+	test('should expose the same version metadata as require("30log")', function()
+		assert_equal(class._VERSION, require('30log')._VERSION)
+	end)
+	
 	after(function()
 		class = nil
 	end)
 	
+end)
+
+context('require("30log-singleton")', function()
+
+	local singleton
+	
+	before(function()
+		singleton = require '30log-singleton'
+	end)
+	
+	test('should return a class-like table', function()
+		assert_type(singleton, 'table')
+		assert_type(singleton.getInstance, 'function')
+	end)
+	
+	test('should always return the same instance', function()
+		assert_equal(singleton:getInstance(), singleton:getInstance())
+	end)
+	
+	test('should still inherit from require("30log") class system', function()
+		assert_true(require('30log').isClass(singleton))
+	end)
+
 end)

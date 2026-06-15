@@ -1,3 +1,13 @@
+-- 30log-clean.lua, minimal object-orientation for Lua.
+--
+-- This file is the single source of truth for 30log's implementation. Every
+-- other entry point is a thin wrapper around it, so the core logic never has to
+-- be hand-copied (and never drifts) between files:
+--   * 30log.lua         -> returns this module (the canonical `require '30log'`)
+--   * 30log-global.lua  -> returns this module and also exposes a global `class`
+--   * 30log-singleton.lua / 30log-commons.lua -> built on top of `require '30log'`
+-- Keep all behavioural changes here.
+
 local next         = next
 local assert       = assert
 local pairs        = pairs
